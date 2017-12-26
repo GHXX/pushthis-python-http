@@ -7,7 +7,6 @@
 from __future__ import print_function
 
 import json
-
 import requests
 
 
@@ -29,7 +28,7 @@ class Pushthis:
 
         self.channel = channel
 
-    def event(self, event):
+    def set_event(self, event):
         # type: (str) -> None
         """
         Set the event.
@@ -73,7 +72,6 @@ class Pushthis:
         # check if payloads in queue
         if len(self.payload_queue) != 0:
             # Create Payload Build - Multi-Payload
-            print('Multi Request')
             payload = {
                 'secret': self.secret,
                 'key': self.key,
@@ -82,11 +80,10 @@ class Pushthis:
 
             headers = {'content-type': 'application/json'}
             response = requests.post(self.access_point, data=json.dumps(payload), headers=headers)
-            print(response)
+            return response
 
         else:
             # Create Payload Build - Single Payload
-            print('Single Request')
             payload = {
                 'secret': self.secret,
                 'key': self.key,
@@ -99,7 +96,7 @@ class Pushthis:
 
             headers = {'content-type': 'application/json'}
             response = requests.post(self.access_point, data=json.dumps(payload), headers=headers)
-            print(response)
+            return response
 
     def authorize(self, status, channel, socket_id):
         # type: (bool, str, str) -> None
@@ -113,7 +110,6 @@ class Pushthis:
         """
         
         # Create Authorize Payload Build
-        print('Authorizing Request')
         payload = {
             'secret': self.secret,
             'key': self.key,
@@ -126,4 +122,4 @@ class Pushthis:
 
         headers = {'content-type': 'application/json'}
         response = requests.post(self.access_point, data=json.dumps(payload), headers=headers)
-        print(response)
+        return response

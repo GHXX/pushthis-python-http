@@ -7,15 +7,15 @@ class Example:
     ##define these wherever floats your boat
     key = ''
     secret = ''
-    accessPointAPI = 'https://na.pushthis.io/api'
-    accessPointAuth = 'https://na.pushthis.io/auth'
+    accessPointAPI = ''
+    accessPointAuth = ''
 
     ##Create new instance of Pushthis
     pushthis = Please.Pushthis(key, secret, accessPointAPI)
 
     ##Set the channel and event
-    pushthis.setChannel('pushthisNetwork')
-    pushthis.setEvent('demo')
+    pushthis.set_channel('pushthisNetwork')
+    pushthis.set_event('demo')
 
     ##Lets build the payload
     payload = {
@@ -27,7 +27,8 @@ class Example:
     pushthis.attach(payload)
 
     #lets send this off!
-    pushthis.send()
+    response = pushthis.send()
+    print('Single payload response is: ' + str(response))
 
 
 
@@ -62,7 +63,8 @@ class Example:
     pushthis.add(sendToChatRooms)
 
     ## lets send the queued payloads
-    pushthis.send()
+    response = pushthis.send()
+    print('Multi-payload response is: ' + str(response))
 
 
 
@@ -71,5 +73,7 @@ class Example:
 
     pushthis = Please.Pushthis(key, secret, accessPointAuth)
     # pushthis.authorize(boolean, channel, socket_id) # Example of args
-    pushthis.authorize(True, 'python-private-chat-room', '49fjD_damkoij3d')
-    pushthis.authorize(False, 'python-private-chat-room', '49fjD_damkoij3d')
+    responseTrue = pushthis.authorize(True, 'python-private-chat-room', '49fjD_damkoij3d')
+    responseFalse = pushthis.authorize(False, 'python-private-chat-room', '49fjD_damkoij3d')
+    print('True request response is: ' + str(responseTrue))
+    print('False request response is: ' + str(responseFalse))
