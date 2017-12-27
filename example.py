@@ -1,4 +1,4 @@
-import pushthis.pushthis as Please
+import __init__.__init__ as Please
 
 class Example:
 
