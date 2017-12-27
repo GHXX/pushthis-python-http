@@ -1,4 +1,4 @@
-import src.pushthis as Please
+import pushthis.pushthis as Please
 
 class Example:
 
